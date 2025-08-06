@@ -6,6 +6,7 @@ function InputForm({ label, value, onChange, placeholder = '', name = '', type =
       <input
         type={type}
         name={name}
+        id = {idInput}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

@@ -1,15 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import InputForm from './InputForm'
 
-function TareaForm({onAddTarea}) {
-
+function TareaForm({ onAddTarea, initialData = {}, isEditing = false }) {
     const [tareaTitle, setTareatitle] = useState('');
     const [tareaDescripcion, setTareadescripcion] = useState('');
 
-    const handledSubmit = (e) =>{
+    useEffect(() => {
+        if (isEditing) {
+            setTareatitle(initialData.tareaTitle || '');
+            setTareadescripcion(initialData.tareaDescripcion || '');
+        }
+    }, [initialData, isEditing]);
+
+
+    const handledSubmit = (e) => {
         e.preventDefault();
-        if(!tareaTitle.trim()) return;
-        onAddTarea({tareaTitle, tareaDescripcion});
+        if (!tareaTitle.trim()) return;
+
+        const nuevaTarea = {
+            ...initialData,
+            tareaTitle,
+            tareaDescripcion,
+        };
+
+        onAddTarea(nuevaTarea);
         setTareatitle("");
         setTareadescripcion("");
     }
@@ -18,9 +32,9 @@ function TareaForm({onAddTarea}) {
             <h1 className='font-semibold text-2xl'>Organizador de Tareas</h1>
             <form onSubmit={handledSubmit}>
 
-                <InputForm idInput="tareaTitleId" label="Tarea" value={tareaTitle} onChange={(e) => setTareatitle(e.target.value)} placeholder='Ej: Ajustar css al formulario' name='tareaTitle' type='text'/>
+                <InputForm idInput="tareaTitleId" label="Tarea" value={tareaTitle} onChange={(e) => setTareatitle(e.target.value)} placeholder='Ej: Ajustar css al formulario' name='tareaTitle' type='text' />
                 <InputForm idInput="tareaDescripcionId" label="Descripción" value={tareaDescripcion} onChange={(e) => setTareadescripcion(e.target.value)} placeholder='Ajustar detalles con los margenes...' name='tareaDescripcion' type='text' />
-                <button type='submit' className='bg-green-700 text-white font-semibold py-2 px-8 rounded cursor-pointer hover:not-focus:bg-green-900'>Agregar Tarea</button>
+                <button type='submit' className='bg-green-700 text-white font-semibold py-2 px-8 rounded cursor-pointer hover:not-focus:bg-green-900'>{isEditing ? 'Actualizar Tarea' : 'Agregar Tarea'}</button>
             </form>
         </div>
     )
