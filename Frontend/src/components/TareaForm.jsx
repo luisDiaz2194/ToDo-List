@@ -20,7 +20,7 @@ function TareaForm({onAddTarea}) {
 
                 <InputForm idInput="tareaTitleId" label="Tarea" value={tareaTitle} onChange={(e) => setTareatitle(e.target.value)} placeholder='Ej: Ajustar css al formulario' name='tareaTitle' type='text'/>
                 <InputForm idInput="tareaDescripcionId" label="Descripción" value={tareaDescripcion} onChange={(e) => setTareadescripcion(e.target.value)} placeholder='Ajustar detalles con los margenes...' name='tareaDescripcion' type='text' />
-                <button type='submit' className='bg-indigo-500 text-white font-semibold py-2 px-8 rounded cursor-pointer hover:not-focus:bg-indigo-800'>Agregar Tarea</button>
+                <button type='submit' className='bg-green-700 text-white font-semibold py-2 px-8 rounded cursor-pointer hover:not-focus:bg-green-900'>Agregar Tarea</button>
             </form>
         </div>
     )
