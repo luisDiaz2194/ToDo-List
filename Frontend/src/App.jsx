@@ -43,12 +43,28 @@ function App() {
     setTareas(tareas.filter((Tarea) => Tarea.id !== id));
     showToast('Tarea Eliminada', 'error');
   };
+
+  //Tarea completada o no completada 
+  const handleToggleCompletada = (id) => {
+    const tareasActualizadas = tareas.map(t =>
+      t.id === id ? { ...t, completed: !t.completed } : t
+    );
+
+    // mover tareas completadas al final
+    const ordenadas = [
+      ...tareasActualizadas.filter(t => !t.completed),
+      ...tareasActualizadas.filter(t => t.completed),
+    ];
+
+    setTareas(ordenadas);
+  };
+
   return (
     <>
       <div className="p-4 max-w-xl mx-auto">
         <TareaForm onAddTarea={handledAddTarea} />
         <TareaList tareas={tareas} onDelete={handleDeleteTarea} onView={handleViewTarea}
-          onEdit={handleEditTarea} />
+          onEdit={handleEditTarea} onToggleComplete={handleToggleCompletada} />
         <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
           {tareaActiva && !modoEdicion && (
             <div>

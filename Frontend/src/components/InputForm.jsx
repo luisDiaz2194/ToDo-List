@@ -9,7 +9,6 @@ function InputForm({ label, value, onChange, placeholder = '', name = '', type =
           validationInputTargetValue: event.target.value,
           validationInputTargetResult: isValid
         })
-        console.log(className)
   }
 
 
