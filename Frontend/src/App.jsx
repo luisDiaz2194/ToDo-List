@@ -3,8 +3,7 @@ import './App.css'
 import TareaForm from './components/TareaForm'
 import TareaList from './components/TareaList';
 import Modal from './components/Modal'
-import Toast
-  from './components/Toast';
+import Toast from './components/Toast';
 function App() {
   const [toast, setToast] = useState({ message: '', type: '' });
 
